@@ -6,6 +6,7 @@ from .components.inst import insert
 from .components.next_jornada import next_jor
 from .components.table import table_ataque, table_defensa
 from .components.up_stats import update_est, button_change
+from .components.up_match import update_hour
 from .backend.api import api_test, update_res_match, update_hour_match
 from .models import Partidos
 # from coras import style
@@ -64,6 +65,12 @@ def insertar():
         insert()
         )
 
+def actualizar_partidos():
+    return rx.box(
+         navbar(),
+         update_hour()
+    )
+
 
 
 
@@ -74,6 +81,7 @@ app.add_page(partidos, route="/partidos", title = "Bmcoras")
 app.add_page(stats, route="/stats", title = "Bmcoras")
 app.add_page(insertar, route="/inst", title = "Bmcoras")
 app.add_page(actualizar_stats, route="/update-stats", title = "Bmcoras")
+app.add_page(actualizar_partidos, route="/update-matches", title = "Bmcoras")
 
 app.api.add_api_route("/items/{item_id}", api_test)
 app.api.add_api_route("/resultado/{category}/{enemy}/{day}/{res}/{enemy_res}", update_res_match)

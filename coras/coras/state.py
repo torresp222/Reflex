@@ -1,6 +1,7 @@
 import reflex as rx
 from typing import List, Dict
 from .models import Partidos
+from .backend.api import update_hour_match
 import asyncio
 import json
 from datetime import datetime
@@ -173,3 +174,8 @@ class State(rx.State):
         print(type(match.enemy))
 
         return next_date_str, match.enemy, match.local, match.poli, match.hour, match.rest, match.res, match.enemy_res
+    
+
+    async def update_hour_one_match(self, form_data: dict):
+        await update_hour_match(form_data["category"],form_data["enemy"],form_data["day"],form_data["hour"])
+ 
