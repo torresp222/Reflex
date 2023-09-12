@@ -6,7 +6,7 @@ from .components.inst import insert
 from .components.next_jornada import next_jor
 from .components.table import table_ataque, table_defensa
 from .components.up_stats import update_est, button_change
-from .components.up_match import update_hour
+from .components.up_match import update_hour, update_poli, update_day
 from .backend.api import api_test, update_res_match, update_hour_match
 from .models import Partidos
 # from coras import style
@@ -68,8 +68,18 @@ def insertar():
 def actualizar_partidos():
     return rx.box(
          navbar(),
-         update_hour()
+         rx.hstack(
+            rx.center(rx.heading("Hora")),
+            update_hour(),
+            rx.center(rx.heading("Pabellon")),
+            update_poli(),
+            rx.center(rx.heading("Dia")),
+            update_day()
+         )
+         
+                           
     )
+
 
 
 

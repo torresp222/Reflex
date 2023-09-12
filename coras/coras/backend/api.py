@@ -31,8 +31,9 @@ async def update_res_match(category: str, enemy: str, day: str, res: str, enemy_
         }
 
 async def update_hour_match(category: str, enemy: str, day: str, hour: str):
-    with rx.session() as session:
-            session.refresh(Partidos)
+
+    try:
+        with rx.session() as session:
             partido = (
                 session.query(Partidos)
                 .filter(Partidos.category.contains(category), Partidos.enemy.contains(enemy), Partidos.day.contains(day))
@@ -42,10 +43,8 @@ async def update_hour_match(category: str, enemy: str, day: str, hour: str):
             print(partido)
             partido.hour = hour
             session.commit()
-   # try:
-        
-  #  except Exception as e:
-  #      print(e)
+    except Exception as e:
+        print(e)
 
     return {
         "categoria": partido.category,

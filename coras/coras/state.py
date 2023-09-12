@@ -177,5 +177,41 @@ class State(rx.State):
     
 
     async def update_hour_one_match(self, form_data: dict):
-        await update_hour_match(form_data["category"],form_data["enemy"],form_data["day"],form_data["hour"])
+        with rx.session() as session:
+            #session.refresh(Partidos)
+            partido = (
+                session.query(Partidos)
+                .filter(Partidos.category.contains(form_data["category"]), Partidos.enemy.contains(form_data["enemy"]), Partidos.day.contains(form_data["day"]))
+                .first()
+            )
+            # partido.update()
+            print(partido)
+            partido.hour = form_data["hour"]
+            session.commit()
  
+    async def update_poli_one_match(self, form_data: dict):
+        with rx.session() as session:
+            #session.refresh(Partidos)
+            partido = (
+                session.query(Partidos)
+                .filter(Partidos.category.contains(form_data["category"]), Partidos.enemy.contains(form_data["enemy"]), Partidos.day.contains(form_data["day"]))
+                .first()
+            )
+            # partido.update()
+            print(partido)
+            partido.poli = form_data["poli"]
+            session.commit()
+
+
+    async def update_day_one_match(self, form_data: dict):
+        with rx.session() as session:
+            #session.refresh(Partidos)
+            partido = (
+                session.query(Partidos)
+                .filter(Partidos.category.contains(form_data["category"]), Partidos.enemy.contains(form_data["enemy"]), Partidos.day.contains(form_data["day"]))
+                .first()
+            )
+            # partido.update()
+            print(partido)
+            partido.day = form_data["day_act"]
+            session.commit()
