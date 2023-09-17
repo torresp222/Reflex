@@ -11,7 +11,7 @@ def next_jor():
                     rx.cond(
                         State.rest,
                         rx.text(" "),
-                        rx.fragment(
+                        rx.box(
                             rx.cond(
                                 State.local,
                                 rx.hstack(

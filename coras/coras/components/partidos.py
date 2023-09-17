@@ -13,7 +13,7 @@ def buscador():
             on_change=State.set_selected,
             on_click=State.give_enemy_team,
             # on_mouse_down=State.give_enemy_team,
-            on_mouse_down=State.transition,
+            #on_mouse_down=State.transition,
             # close_menu_on_select=False,
             color_schemes="twitter"
         ),
